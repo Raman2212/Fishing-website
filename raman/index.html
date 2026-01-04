@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard - Website Safety Scanner</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="background-shapes">
+        <div class="cyber-grid"></div>
+        <div class="floating-particles"></div>
+    </div>
+
+    <!-- Auth Section -->
+    <section id="auth-section" class="auth-container">
+        <div class="auth-card glass-card">
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form">
+                <div class="auth-header">
+                    <img src="logo.png" alt="PhishGuard" class="auth-logo-img">
+                    <h2>Welcome</h2>
+                    <p>Login to access PhishGuard</p>
+                </div>
+                <form id="login-form-element" autocomplete="on">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" id="login-username" placeholder="Username" autocomplete="username" name="username">
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" name="password">
+                        <i class="fa-solid fa-eye-slash toggle-password" id="toggle-login-pass"></i>
+                    </div>
+                    <button type="button" id="login-btn" class="scan-btn full-width">
+                        <span class="btn-text">Login</span>
+                        <div class="btn-loader hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#" id="show-register">Register</a>
+                </p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="auth-form hidden-form">
+                <div class="auth-header">
+                    <img src="logo.png" alt="PhishGuard" class="auth-logo-img">
+                    <h2>Create Account</h2>
+                    <p>Join PhishGuard today</p>
+                </div>
+                <form id="register-form-element" autocomplete="on">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input type="text" id="reg-username" placeholder="Choose Username" autocomplete="username" name="username">
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="reg-password" placeholder="Choose Password" autocomplete="new-password" name="password">
+                        <i class="fa-solid fa-eye-slash toggle-password" id="toggle-reg-pass"></i>
+                    </div>
+                    <button type="button" id="register-btn" class="scan-btn full-width">
+                        <span class="btn-text">Register</span>
+                        <div class="btn-loader hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+                        <div class="btn-glow"></div>
+                    </button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" id="show-login">Login</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <nav class="navbar glass-nav hidden" id="main-nav">
+        <div class="logo" id="nav-home">
+            <img src="logo.png" alt="PhishGuard" class="logo-img">
+        </div>
+        <div class="nav-actions">
+            <span id="user-display" class="user-welcome"></span>
+            <button id="nav-dashboard" class="nav-link">Dashboard</button>
+            <button id="logout-btn" class="nav-link danger-text">Logout</button>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container hidden" id="main-content">
+        <!-- Hero & Input Section -->
+        <section id="hero-section" class="hero fade-in">
+            <h1 class="headline">Check if a Website is <span class="highlight">Safe</span></h1>
+            <p class="subtitle">Detect phishing websites instantly with our advanced AI scanner.</p>
+
+            <div class="url-card glass-card">
+                <div class="input-group">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="url" id="url-input" placeholder="https://example.com" autocomplete="off">
+                </div>
+                <button id="scan-btn" class="scan-btn">
+                    <span>Scan URL</span>
+                    <div class="btn-glow"></div>
+                </button>
+            </div>
+
+            <div class="security-icons">
+                <div class="icon-item" title="SSL Verification"><i class="fa-solid fa-certificate"></i></div>
+                <div class="icon-item" title="Domain Reputation"><i class="fa-solid fa-globe"></i></div>
+                <div class="icon-item" title="Threat Intelligence"><i class="fa-solid fa-bug"></i></div>
+            </div>
+        </section>
+
+        <!-- Scanning Animation Section -->
+        <section id="scanning-section" class="scanning hidden">
+            <div class="scanner-container">
+                <div class="shield-spinner">
+                    <i class="fa-solid fa-shield-virus"></i>
+                    <div class="spinner-ring"></div>
+                </div>
+                <h2 id="scan-text">Analyzing URL...</h2>
+                <div class="scan-steps">
+                    <div class="step" id="step-1"><i class="fa-regular fa-circle"></i> Checking domain...</div>
+                    <div class="step" id="step-2"><i class="fa-regular fa-circle"></i> Verifying SSL...</div>
+                    <div class="step" id="step-3"><i class="fa-regular fa-circle"></i> Analyzing behavior...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Result Section -->
+        <section id="result-section" class="result hidden">
+            
+            <!-- Safe Result -->
+            <div id="safe-result" class="result-card glass-card hidden full-width-card">
+                <div class="status-icon safe-icon">
+                    <i class="fa-solid fa-shield-check"></i>
+                    <div class="ripple"></div>
+                </div>
+                <h2>This Website Appears Safe</h2>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.2rem;">
+                    <p class="result-url" style="margin: 0;"></p>
+                    <button class="action-btn safe-btn" onclick="resetScanner()" style="padding: 0.2rem 0.6rem; font-size: 0.75rem;">Scan Another</button>
+                </div>
+            </div>
+
+            <!-- Phishing Result -->
+            <div id="phishing-result" class="result-card glass-card hidden full-width-card">
+                <div class="status-icon danger-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div class="pulse-ring"></div>
+                </div>
+                <h2>Phishing Website Detected!</h2>
+                <p class="result-url"></p>
+                <p class="warning-text">This site may be trying to steal your information.</p>
+                <div class="button-group">
+                    <button class="action-btn danger-btn">Learn How to Stay Safe</button>
+                    <button class="secondary-btn" onclick="resetScanner()">Scan Another</button>
+                </div>
+            </div>
+
+            <div class="result-grid-container">
+                <!-- Details Panel -->
+                <div id="details-panel" class="details-panel glass-card hidden">
+                    <div class="panel-header" id="toggle-details">
+                        <h3>Scan Details</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="panel-content">
+                        <div class="detail-item">
+                            <span>Domain Trust Score</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="trust-score" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="detail-grid" style="grid-template-columns: 1fr;">
+                            <div class="grid-item">
+                                <i class="fa-solid fa-lock"></i>
+                                <span>SSL Status</span>
+                                <strong id="ssl-status">Checking...</strong>
+                            </div>
+                            <div class="grid-item">
+                                <i class="fa-solid fa-server"></i>
+                                <span>Server Location</span>
+                                <strong id="server-loc">Unknown</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Preview Section -->
+                <div id="preview-panel" class="details-panel glass-card hidden">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-image"></i> Website Preview</h3>
+                    </div>
+                    <div class="panel-content">
+                        <div class="preview-container">
+                            <div id="preview-loader" class="preview-loader">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                                <p>Loading preview...</p>
+                            </div>
+                            <img id="preview-image" class="preview-image hidden" alt="Website Preview">
+                            <p class="preview-warning"><i class="fa-solid fa-info-circle"></i> Preview shown for analysis only. Do not visit suspicious sites.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WHOIS Details Section -->
+                <div id="whois-panel" class="details-panel glass-card hidden full-width-card">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-globe"></i> Domain Information (WHOIS)</h3>
+                    </div>
+                    <div class="panel-content">
+                        <div id="whois-loader" class="whois-loader">
+                            <i class="fa-solid fa-circle-notch fa-spin"></i>
+                            <p>Fetching domain details...</p>
+                        </div>
+                        <div id="whois-content" class="whois-content hidden">
+                            <div class="detail-grid">
+                                <div class="grid-item">
+                                    <i class="fa-solid fa-tag"></i>
+                                    <span>Domain</span>
+                                    <strong id="whois-domain">-</strong>
+                                </div>
+                                <div class="grid-item">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <span>Created Date</span>
+                                    <strong id="whois-created">-</strong>
+                                </div>
+                                <div class="grid-item">
+                                    <i class="fa-solid fa-flag"></i>
+                                    <span>Country</span>
+                                    <strong id="whois-country">-</strong>
+                                </div>
+                                <div class="grid-item">
+                                    <i class="fa-solid fa-building"></i>
+                                    <span>Organization</span>
+                                    <strong id="whois-org">-</strong>
+                                </div>
+                                <div class="grid-item">
+                                    <i class="fa-solid fa-network-wired"></i>
+                                    <span>IP Address</span>
+                                    <strong id="whois-ip">-</strong>
+                                </div>
+                                <div class="grid-item">
+                                    <i class="fa-solid fa-server"></i>
+                                    <span>ISP</span>
+                                    <strong id="whois-isp">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="whois-error" class="whois-error hidden">
+                            <i class="fa-solid fa-exclamation-triangle"></i>
+                            <p>Unable to fetch domain information</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="dashboard hidden">
+            <h2 class="section-title">Security Dashboard</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon blue"><i class="fa-solid fa-search"></i></div>
+                    <div class="stat-info">
+                        <h3>Total Scans</h3>
+                        <span id="total-scans">0</span>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-shield-check"></i></div>
+                    <div class="stat-info">
+                        <h3>Safe Sites</h3>
+                        <span id="safe-count">0</span>
+                    </div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div class="stat-info">
+                        <h3>Phishing Detected</h3>
+                        <span id="phishing-count">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-container glass-card">
+                <div class="history-header">
+                    <h3>Recent Scan Logs</h3>
+                    <div class="history-buttons">
+                        <button id="export-history" class="secondary-btn small" title="Download history as JSON">
+                            <i class="fa-solid fa-download"></i> Export
+                        </button>
+                        <button id="clear-history" class="secondary-btn small danger">
+                            <i class="fa-solid fa-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+                <div class="history-list" id="history-list">
+                    <!-- History items will be injected here -->
+                    <div class="empty-state">No scan history found.</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
